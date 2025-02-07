@@ -11,9 +11,9 @@
 #define endereco 0x3C
 
 
-#define LED_PIN_RED 11
-#define LED_PIN_GREEN 12
-#define LED_PIN_BLUE 13
+#define LED_PIN_RED 13
+#define LED_PIN_GREEN 11
+#define LED_PIN_BLUE 12
 #define BUTTON_A 5
 #define BUTTON_B 6
 #define I2C_SDA 14
@@ -140,8 +140,8 @@ static void gpio_irq_handler(uint gpio, uint32_t events) {
             printf("Botão A pressionado, estado do LED alterado\n");
 
         } else if (gpio == BUTTON_B) {
-            //Mudar o estado do led vermelho ao pressionar o botão B
-            gpio_put(LED_PIN_RED, !gpio_get(LED_PIN_RED));
+            //Mudar o estado do led azul ao pressionar o botão B
+            gpio_put(LED_PIN_BLUE, !gpio_get(LED_PIN_BLUE));
             printf("Botão B pressionado, estado do LED alterado\n");
 
             // Exibe uma mensagem no display
