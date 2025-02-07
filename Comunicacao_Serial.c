@@ -150,8 +150,6 @@ static void gpio_irq_handler(uint gpio, uint32_t events) {
             ssd1306_rect(&ssd, 3, 3, 122, 58, cor, !cor); // Desenha um retângulo
             ssd1306_draw_string(&ssd, "BOTAO B", 20, 30); // Desenha uma stringstring      
             ssd1306_send_data(&ssd); // Atualiza o display
-            
-            
         }   
             // Registra o tempo do último evento
             ultima = tempo_atual;
@@ -214,7 +212,7 @@ while (true) {
     // Verifica se o caractere é um número
     if (c >= '0' && c <= '9') {
         number = c - '0'; // Converte o caractere para um número
-        
+
         // Exibe o número no display a partir do switch case
         switch(number){
             case 0:
