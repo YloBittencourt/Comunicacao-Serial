@@ -10,7 +10,7 @@
 
 #define endereco 0x3C
 
-
+// Definições de pinos
 #define LED_PIN_RED 13
 #define LED_PIN_GREEN 11
 #define LED_PIN_BLUE 12
@@ -89,6 +89,7 @@ double led[10][25] = {
         }  // 9
     };
 
+// Sequência de LEDs
 int sequencia[25] = {
     0, 1, 2, 3, 4,
     9, 8, 7, 6, 5,
@@ -101,8 +102,8 @@ int sequencia[25] = {
 uint32_t cores(double vermelho)
 {
   unsigned char R;
-  R = vermelho * 100; 
-  return (R << 16);
+  R = vermelho * 100; // Ajusta a intensidade do vermelho
+  return (R << 16); // Retorna o valor do vermelho (deslocamento de 16 bits) 
 }
 
 // Converte os valores da matriz de LEDs para a matriz de LEDs da PIO
@@ -118,7 +119,7 @@ static volatile uint32_t ultima = 0; // Inicializa o tempo do último evento
 
 // Função de interrupção
 static void gpio_irq_handler(uint gpio, uint32_t events) {
-    uint32_t tempo_atual = to_ms_since_boot(get_absolute_time());
+    uint32_t tempo_atual = to_ms_since_boot(get_absolute_time()); // Obtém o tempo atual
 
     // Inverte a cor
     bool cor = true;
@@ -178,26 +179,27 @@ int main()
 
     // Inicializa a PIO
     pio = pio0;
-    uint offset = pio_add_program(pio, &led_program);
+    uint offset = pio_add_program(pio, &led_program); 
     uint sm = pio_claim_unused_sm(pio, true);
     led_program_init(pio, sm, offset, 7);
 
     // I2C Initialisation. Using it at 400Khz.
-  i2c_init(I2C_PORT, 400 * 1000);
+    i2c_init(I2C_PORT, 400 * 1000);
 
-  gpio_set_function(I2C_SDA, GPIO_FUNC_I2C); // Set the GPIO pin function to I2C
-  gpio_set_function(I2C_SCL, GPIO_FUNC_I2C); // Set the GPIO pin function to I2C
-  gpio_pull_up(I2C_SDA); // Pull up the data line
-  gpio_pull_up(I2C_SCL); // Pull up the clock line
+    gpio_set_function(I2C_SDA, GPIO_FUNC_I2C); // Set the GPIO pin function to I2C
+    gpio_set_function(I2C_SCL, GPIO_FUNC_I2C); // Set the GPIO pin function to I2C
+    gpio_pull_up(I2C_SDA); // Pull up the data line
+    gpio_pull_up(I2C_SCL); // Pull up the clock line
  
-  ssd1306_init(&ssd, WIDTH, HEIGHT, false, endereco, I2C_PORT); // Inicializa o display
-  ssd1306_config(&ssd); // Configura o display
-  ssd1306_send_data(&ssd); // Envia os dados para o display
+    ssd1306_init(&ssd, WIDTH, HEIGHT, false, endereco, I2C_PORT); // Inicializa o display
+    ssd1306_config(&ssd); // Configura o display
+    ssd1306_send_data(&ssd); // Envia os dados para o display
 
-  char mensagem[2] = {0};  // Buffer para armazenar a mensagem
+    char mensagem[2] = {0};  // Buffer para armazenar a mensagem
 
-  gpio_set_irq_enabled_with_callback(BUTTON_A, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
-  gpio_set_irq_enabled_with_callback(BUTTON_B, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
+    // Configura a interrupção
+    gpio_set_irq_enabled_with_callback(BUTTON_A, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
+    gpio_set_irq_enabled_with_callback(BUTTON_B, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
 
 
 while (true) {
@@ -209,8 +211,11 @@ while (true) {
         mensagem[0] = (char)c;
         mensagem[1] = '\0';  // Termina a string corretamente
 
+    // Verifica se o caractere é um número
     if (c >= '0' && c <= '9') {
-        number = c - '0';
+        number = c - '0'; // Converte o caractere para um número
+        
+        // Exibe o número no display a partir do switch case
         switch(number){
             case 0:
                 display_num(0);
