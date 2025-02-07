@@ -183,13 +183,13 @@
       "violet",
       [ "h-28.8", "v-144", "h124.8", "v240", "h489.6", "v-115.2", "h-9.6" ]
     ],
-    [ "rgb26:G", "pico:GP12", "limegreen", [ "v-1.3", "h38.4", "v-38.4", "h-96", "v86.4" ] ],
-    [ "rgb26:B", "pico:GP11", "blue", [ "h28.8", "v-20.8", "h-76.8", "v57.6" ] ],
-    [ "rgb26:R", "pico:GP13", "red", [ "v38.4" ] ],
     [ "oled1:SDA", "pico:GP14", "blue", [ "v0" ] ],
     [ "oled1:SCL", "pico:GP15", "green", [ "v0" ] ],
     [ "oled1:VCC", "vcc6:VCC", "red", [ "v-28.8", "h0.15" ] ],
-    [ "pico:GND.4", "oled1:GND", "black", [ "h0" ] ]
+    [ "pico:GND.4", "oled1:GND", "black", [ "h0" ] ],
+    [ "rgb26:R", "pico:GP11", "red", [ "v0" ] ],
+    [ "rgb26:G", "pico:GP12", "green", [ "v0" ] ],
+    [ "rgb26:B", "pico:GP13", "blue", [ "h0", "v-40", "h-57.6", "v163.2" ] ]
   ],
   "dependencies": {}
 }
