@@ -59,6 +59,7 @@ pico_generate_pio_header(Comunicacao_Serial ${CMAKE_CURRENT_LIST_DIR}/led.pio)
 target_link_libraries(Comunicacao_Serial
         hardware_i2c
         hardware_pio
+        hardware_clocks
         )
 
 # Add any user requested libraries

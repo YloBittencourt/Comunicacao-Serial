@@ -5,6 +5,7 @@
 #include "font.h"
 #include "hardware/gpio.h"
 #include "hardware/i2c.h"
+#include "hardware/clocks.h"
 #include "led.pio.h"
 #include "ssd1306.h"
 
