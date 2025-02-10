@@ -103,7 +103,7 @@ int sequencia[25] = {
 uint32_t cores(double vermelho)
 {
   unsigned char R;
-  R = vermelho * 100; // Ajusta a intensidade do vermelho
+  R = vermelho * 50; // Ajusta a intensidade do vermelho
   return (R << 16); // Retorna o valor do vermelho (deslocamento de 16 bits) 
 }
 
